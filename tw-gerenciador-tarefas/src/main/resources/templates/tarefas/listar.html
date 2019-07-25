@@ -10,6 +10,7 @@
 	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
 
 	<div class="container">
+		<a href="/tarefas/inserir" class="btn btn-success">Inserir nova tarefa</a>
 		<h3>Listagem de tarefas</h3>
 		<div th:each="tarefa: ${tarefas}">
 			<div class="card bg-light mb-3">
