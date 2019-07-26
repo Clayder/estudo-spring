@@ -1,5 +1,7 @@
 package br.com.clayder.twgerenciadortarefas.controllers;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,12 @@ public class TarefasController {
 	@PostMapping("/inserir")
 	public ModelAndView inserir(@Valid Tarefa tarefa, BindingResult result) {
 		ModelAndView mv = new ModelAndView();
+		
+		if(tarefa.getDataExpiracao().before(new Date())) {
+			result.rejectValue("dataExpiracao", "tarefa.dataExpiracaoInvalida", 
+					"A data de expiração não pode ser anterior à data atual");
+		}
+		
 		if(result.hasErrors()) {
 			mv.setViewName("tarefas/inserir");
 			mv.addObject(tarefa);
