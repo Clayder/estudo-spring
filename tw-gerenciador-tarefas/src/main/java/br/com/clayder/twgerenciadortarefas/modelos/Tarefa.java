@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -21,9 +23,12 @@ public class Tarefa {
 	private Long id;
 	
 	@Column(name = "tar_titulo", length = 50, nullable = false)
+	@NotNull(message = "O titulo é obrigatório")
+	@Length(max=50, min=3, message="O titulo deve conter entre 3 e 50 caracteres")
 	private String titulo;
 	
 	@Column(name= "tar_descricao", length = 100, nullable = true)
+	@Length(max=100, message="O titulo deve conter no máximo 100 caracteres")
 	private String descricao;
 	
 	@Column(name = "tar_data_expiracao", nullable = false)
